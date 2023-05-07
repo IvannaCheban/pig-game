@@ -21,6 +21,14 @@ const scores = [0, 0]; //score of player 1 will be at position 0 and player 2 at
 let currentScore = 0;
 let activePlayer = 0; //we will store the score of both payers in an array;
 
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0; //setting active player score to 0 before switch
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  currentScore = 0;
+  player0El.classList.toggle("player--active");
+  player1El.classList.toggle("player--active");
+}; //if class is there it will remove it, othervise - add
+
 //rolling dice funcitonality
 
 btnRoll.addEventListener("click", function () {
@@ -38,10 +46,17 @@ btnRoll.addEventListener("click", function () {
       currentScore;
   } else {
     //switch to next player
-    document.getElementById(`current--${activePlayer}`).textContent = 0; //setting active player score to 0 before switch
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    currentScore = 0;
-    player0El.classList.toggle("player--active");
-    player1El.classList.toggle("player--active"); //if class is there it will remove it, othervise - add
+    switchPlayer();
   }
+});
+btnHold.addEventListener("click", function () {
+  //add current score to the score of  the active player
+  scores[activePlayer] += currentScore;
+  //   scores[1] = scores[1] + currentScore;
+  document.getElementById(`score--${activePlayer}`).textContent =
+    scores[activePlayer];
+  //check if score of the active player is >=100
+  //Finish the game
+  //Switch to next player
+  switchPlayer();
 });

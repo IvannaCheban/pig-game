@@ -12,15 +12,39 @@ const btnNew = document.querySelector(".btn--new");
 const btnRoll = document.querySelector(".btn--roll");
 const btnHold = document.querySelector(".btn--hold");
 
-//Starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add("hidden");
+// //Starting conditions
+// score0El.textContent = 0;
+// score1El.textContent = 0;
+// diceEl.classList.add("hidden");
 
-const scores = [0, 0]; //score of player 1 will be at position 0 and player 2 at 1;
-let currentScore = 0;
-let activePlayer = 0; //we will store the score of both payers in an array;
-let playing = true; // adding a game stop event
+// const scores = [0, 0]; //score of player 1 will be at position 0 and player 2 at 1;
+// let currentScore = 0;
+// let activePlayer = 0; //we will store the score of both payers in an array;
+// let playing = true; // adding a game stop event
+
+let scores, currentScore, activePlayer, playing;
+const init = function () {
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+  score0El.textContent = 0;
+  score0El.textContent = 0;
+
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
+  diceEl.classList.add("hidden");
+  player0El.classList.remove("player--winner");
+  player1El.classList.remove("player--winner");
+
+  player0El.classList.add("player--active");
+  player1El.classList.remove("player--active");
+};
+init(); //variables are scoped within local funciton
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0; //setting active player score to 0 before switch
@@ -54,13 +78,14 @@ btnRoll.addEventListener("click", function () {
 });
 btnHold.addEventListener("click", function () {
   if (playing) {
+    // State variable
     //add current score to the score of  the active player
     scores[activePlayer] += currentScore;
     //   scores[1] = scores[1] + currentScore;
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
     //check if score of the active player is >=100
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       playing = false;
       document
         .querySelector(`.player--${activePlayer}`)
@@ -75,3 +100,4 @@ btnHold.addEventListener("click", function () {
     //Switch to next player
   }
 });
+btnNew.addEventListener("click", init);

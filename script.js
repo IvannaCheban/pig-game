@@ -5,4 +5,4 @@ const score1El = document.getElementById("score--1"); //working flow is the same
 
 score0El.textContent = 0;
 score1El.textContent = 0;
-let dice = document.querySelector(".dice").classList.remove("dice");
+let diceDisplay = document.querySelector(".dice").classList.add("hidden");
